@@ -1,0 +1,314 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_setup" id="d*=O(nV6O#RvXe5,qFfC" x="36" y="0">
+    <statement name="SETUP_FUNC">
+      <block type="serial_setup" id="Q8tOrB@[_fpF5W,cUUMo">
+        <field name="SERIAL_ID">Serial</field>
+        <field name="SPEED">9600</field>
+        <next>
+          <block type="serial_print" id="B+=p]Vik@;#9uL3r;cPg">
+            <field name="SERIAL_ID">Serial</field>
+            <field name="NEW_LINE">TRUE</field>
+            <value name="CONTENT">
+              <block type="text_join" id="@/h}/G74/D|sJrnO2`IU">
+                <mutation items="2"></mutation>
+                <value name="ADD0">
+                  <block type="text" id="p9S#mteOaNGjTjr}ik7D">
+                    <field name="TEXT">DHT11 senser begin to detect ...</field>
+                  </block>
+                </value>
+                <value name="ADD1">
+                  <block type="text" id="][{LiC9X,#w3M*tA1P^b">
+                    <field name="TEXT">================================</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="io_digitalwrite_var" id="^XwQ%:{=?kM[W7ddPh/r">
+                <value name="PIN">
+                  <block type="io_allpins" id="~{bJ0[g5kna4MP@S+R*b">
+                    <field name="PIN">D5</field>
+                  </block>
+                </value>
+                <value name="STATE">
+                  <block type="io_highlow" id="=8,Ws-l_w65;EHR@Z?oS">
+                    <field name="STATE">LOW</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="serial_print" id="`HwJQnQkfi#.[=cB1;tJ">
+                    <field name="SERIAL_ID">Serial</field>
+                    <field name="NEW_LINE">TRUE</field>
+                    <value name="CONTENT">
+                      <block type="text" id="c+k]:)QNOmEjlm]tx{.I">
+                        <field name="TEXT">... WiFi start to connect ...</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="esp8266_sta_setup" id="73{upeKKuNzQ/1-%t+Bi">
+                        <value name="SSID">
+                          <block type="text" id="w:4@Jzp.2@~4Dz.yYKD?">
+                            <field name="TEXT">煙葉糖銀</field>
+                          </block>
+                        </value>
+                        <value name="PINCODE">
+                          <block type="text" id="z,x]O|9SmaZ_OD6qg3(m">
+                            <field name="TEXT">rita5755</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="controls_whileUntil" id="dLbo(.hZ6To%k#-?dy?`">
+                            <field name="MODE">WHILE</field>
+                            <value name="BOOL">
+                              <block type="logic_negate" id="2PkGFw`8sUE%4]Wv^i)6">
+                                <value name="BOOL">
+                                  <block type="esp8266_connected" id="6k*0t5!u@CmZD?v]7FP0"></block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO">
+                              <block type="time_delay" id="wNrv7{*rkhFpyLgz}*lz">
+                                <value name="DELAY_TIME_MILI">
+                                  <block type="math_number" id="O)i3O8S2_gJr0Y.8(GLs">
+                                    <field name="NUM">1000</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="serial_print" id="i;`y,(chTP8j*xc:9=!k">
+                                <field name="SERIAL_ID">Serial</field>
+                                <field name="NEW_LINE">TRUE</field>
+                                <value name="CONTENT">
+                                  <block type="text_join" id="U4E#xr]E5F:tR|xq{F4;">
+                                    <mutation items="2"></mutation>
+                                    <value name="ADD0">
+                                      <block type="text" id="4jtM!VlRPWCn:DpNX/k?">
+                                        <field name="TEXT">IP adderss : </field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD1">
+                                      <block type="esp8266_localIP" id="MJGPI.O-DohYQ@-;MB`*"></block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="arduino_loop" id="EAg)g_/#Sgta~QPPg4@7" deletable="false" x="30" y="430">
+    <statement name="LOOP_FUNC">
+      <block type="variables_set" id="`/5V|oZO,bm3(^%5`|_9">
+        <field name="VAR">temp</field>
+        <value name="VALUE">
+          <block type="DHT11_readTemp" id="mZy-bySYkVp=2Bh1vn41">
+            <value name="DATAPIN">
+              <block type="io_allpins" id="5yF4b[r0)x,pqF@IqC8A">
+                <field name="PIN">D4</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="@PJ+L_66R9PWYRD+0dXe">
+            <field name="VAR">humi</field>
+            <value name="VALUE">
+              <block type="DHT11_readHumi" id="Re=E.Q23Bq;X9ggp37aQ">
+                <value name="DATAPIN">
+                  <block type="io_allpins" id="WW/y|bzsEdx56%Nwi.9]">
+                    <field name="PIN">D4</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="CPEZZ]O;6*%ffanhB3_*">
+                <field name="VAR">ifttt</field>
+                <value name="VALUE">
+                  <block type="text_join" id="`JXGKRM^X/mu{Y^;{YDg">
+                    <mutation items="9"></mutation>
+                    <value name="ADD0">
+                      <block type="text" id="SJ=(sG]9ljq|pf5Czy:h">
+                        <field name="TEXT">http://maker.ifttt.com/trigger/opendoor/with/key/b6ErXwfG48MT13arLqqNE0/?</field>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="text" id="/B1X1N+c5uE1pU`xi(LK">
+                        <field name="TEXT">value1=</field>
+                      </block>
+                    </value>
+                    <value name="ADD2">
+                      <block type="esp8266_urlencode" id="}:RT@R~|TlyariCS5RGm">
+                        <value name="CONTENT">
+                          <block type="text" id="eudl{L(k~=7B0w0?j_}d">
+                            <field name="TEXT">【即時溫濕度】</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="ADD3">
+                      <block type="text" id="W|D=h)xkeZQ|-Sggn7gk">
+                        <field name="TEXT">&amp;</field>
+                      </block>
+                    </value>
+                    <value name="ADD4">
+                      <block type="text" id="G*J}u]Kk-vlAWKuQ;td=">
+                        <field name="TEXT">value2=</field>
+                      </block>
+                    </value>
+                    <value name="ADD5">
+                      <block type="esp8266_urlencode" id="J`oM!+Lr=adC-(p:vg}q">
+                        <value name="CONTENT">
+                          <block type="text_join" id="e-kdV[51Xg2D00o}TfRq">
+                            <mutation items="2"></mutation>
+                            <value name="ADD0">
+                              <block type="text" id=";s(|JN}%:LI3y!%h5!KG">
+                                <field name="TEXT">溫度 = </field>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="variables_get" id="c7KY8M[A]fmLKT|-cO1a">
+                                <field name="VAR">temp</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="ADD6">
+                      <block type="text" id="HW2^3|B=!MJ]/}[Hm+U1">
+                        <field name="TEXT">&amp;</field>
+                      </block>
+                    </value>
+                    <value name="ADD7">
+                      <block type="text" id="g]4~`o130@?:UN;R|wC6">
+                        <field name="TEXT">value3=</field>
+                      </block>
+                    </value>
+                    <value name="ADD8">
+                      <block type="esp8266_urlencode" id="n?4).vuFEg#T?y)w@{_#">
+                        <value name="CONTENT">
+                          <block type="text_join" id="rSA}h;w*(8r^D:lI;X4n">
+                            <mutation items="2"></mutation>
+                            <value name="ADD0">
+                              <block type="text" id="(}/lJr}k@5pco~W9QG9F">
+                                <field name="TEXT">濕度 = </field>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="variables_get" id="f`E:jvMXs*7Uqa;uRspV">
+                                <field name="VAR">humi</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="serial_print" id="k_yGBvXqcb;mNH=kZZ_F">
+                    <field name="SERIAL_ID">Serial</field>
+                    <field name="NEW_LINE">TRUE</field>
+                    <value name="CONTENT">
+                      <block type="text_join" id="|H)6|lYd@Yg-k(TGkoI*">
+                        <mutation items="5"></mutation>
+                        <value name="ADD0">
+                          <block type="text" id="bvUJ}IVwLL#k,g86{L0d">
+                            <field name="TEXT">temp = </field>
+                          </block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="variables_get" id="BN2`O?J9{?l``sh~EWpH">
+                            <field name="VAR">temp</field>
+                          </block>
+                        </value>
+                        <value name="ADD2">
+                          <block type="text" id="h#)Ez#^Q.vr-,-l`R{Iu">
+                            <field name="TEXT"> ; </field>
+                          </block>
+                        </value>
+                        <value name="ADD3">
+                          <block type="text" id="M9kl-hTd+c_NGLgc#Q22">
+                            <field name="TEXT">humi = </field>
+                          </block>
+                        </value>
+                        <value name="ADD4">
+                          <block type="variables_get" id="mWg|1~MG_rD`ja#3%)OA">
+                            <field name="VAR">humi</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_if" id="ey5@tLBCVK=PS:l@pjwo">
+                        <value name="IF0">
+                          <block type="logic_compare" id="Xv.VDLP,sQ_K?j)RxxXU">
+                            <field name="OP">GTE</field>
+                            <value name="A">
+                              <block type="esp8266_http_get" id="[TP*z%xhM[Uz1cN|..SB">
+                                <value name="URL">
+                                  <block type="variables_get" id="B/:x%Z=!476ez!rVFjJF">
+                                    <field name="VAR">ifttt</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="math_number" id="]Qu![/.tiC4ozn*jMp2r">
+                                <field name="NUM">0</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="time_delay" id="Ri8?8JjLE0Qh5)PzRG+o">
+                            <value name="DELAY_TIME_MILI">
+                              <block type="math_number" id="c-oj;U-uVHJnf1=Isi:Y">
+                                <field name="NUM">60000</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="serial_print" id="pk0{!105S,-sH0*PM=Tf">
+                            <field name="SERIAL_ID">Serial</field>
+                            <field name="NEW_LINE">TRUE</field>
+                            <value name="CONTENT">
+                              <block type="text_join" id="Qo_A0-zylP6Dk23,fGL2">
+                                <mutation items="2"></mutation>
+                                <value name="ADD0">
+                                  <block type="text" id="q@}N9:fkzxCs,aBaxo{0">
+                                    <field name="TEXT">IP adderss : </field>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="esp8266_localIP" id="Cyvm^G8DDc.*~#``,6vP"></block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
